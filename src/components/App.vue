@@ -3,6 +3,9 @@
         <ul>
             <li v-for="item in fruits">
                 {{ item.name }}-{{ item.price }}
+
+
+
             </li>
         </ul>
         <a v-if="isPartA">partA</a>
@@ -12,14 +15,30 @@
             <option v-for="item in op" :value="item.value">{{ item.name }}</option>
         </select>
         {{ selection }}
-        <input v-model="box" type="radio" value="111" >
-        <input v-model="box" type="radio" value="222" >
+        <input v-model="box" type="radio" value="111">
+        <input v-model="box" type="radio" value="222">
         {{ box }}
+
+
+
         <button @click="toggle">toggle</button>
         <a :href="link" :title="link">oooooooo</a>
         <button v-on:click="fuck">fuck</button>
         <input type="text" v-model="myValue">{{ withoutNum }}
+
+
+
         <top :dataa="dataa"></top>
+        <input type="text" v-model="myVal">
+        <top :my-value="myVal" @fu="getMyEvent">
+            <p slot="header">soga</p>
+        </top>
+        <button @click="show = !show">show</button>
+        <div class="as">
+            <transition name="fade">
+                <p v-show="show" class="show">i am show</p>
+            </transition>
+        </div>
     </div>
 </template>
 
@@ -30,21 +49,22 @@
     export default{
         data(){
             return {
-                op:[
+                myVal: '',
+                op: [
                     {
-                        name:'banana',
+                        name: 'banana',
                         value: 0
                     },
                     {
-                        name:'apple',
+                        name: 'apple',
                         value: 1
                     }
                 ],
                 selection: '',
                 box: '',
-                isPartA:true,
+                isPartA: true,
                 dataa: 12,
-                link:'http://www.baidu.com',
+                link: 'http://www.baidu.com',
                 fruits: [
                     {
                         name: 'banana',
@@ -60,7 +80,8 @@
                     price: '12',
                     color: 'yellow'
                 },
-                myValue: ''
+                myValue: '',
+                show: true,
             }
         },
         components: {
@@ -68,13 +89,16 @@
         },
         methods: {
             fuck () {
-                Vue.set(this.fruits,1,{
+                Vue.set(this.fruits, 1, {
                     name: 'pinapple',
                     price: '45'
                 })
             },
             toggle(){
                 this.isPartA = !this.isPartA;
+            },
+            getMyEvent(a){
+                console.log(a + ' fuck you')
             }
         },
         computed: {
@@ -86,5 +110,21 @@
 </script>
 
 <style>
+    .show {
+        opacity: 1;
+    }
 
+    .fade-enter-active, .fade-leave-active {
+        transition: all 0.5s ease-out;
+    }
+
+    .fade-enter{
+        transform: translateY(-500px);
+        opacity: 0;
+    }
+
+    .fade-leave-active {
+        transform: translateY(500px);
+        opacity: 0;
+    }
 </style>

@@ -3,9 +3,6 @@
         <ul>
             <li v-for="item in fruits">
                 {{ item.name }}-{{ item.price }}
-
-
-
             </li>
         </ul>
         <a v-if="isPartA">partA</a>
@@ -18,16 +15,10 @@
         <input v-model="box" type="radio" value="111">
         <input v-model="box" type="radio" value="222">
         {{ box }}
-
-
-
         <button @click="toggle">toggle</button>
         <a :href="link" :title="link">oooooooo</a>
         <button v-on:click="fuck">fuck</button>
         <input type="text" v-model="myValue">{{ withoutNum }}
-
-
-
         <top :dataa="dataa"></top>
         <input type="text" v-model="myVal">
         <top :my-value="myVal" @fu="getMyEvent">
@@ -39,12 +30,16 @@
                 <p v-show="show" class="show">i am show</p>
             </transition>
         </div>
+        <router-link :to="{path:'/head'}">to top</router-link>
+        <router-link :to="{path:'/foot/red'}">to foot</router-link>
+        <router-view></router-view>
     </div>
 </template>
 
 <script>
     import top from './head.vue'
     import Vue from 'vue'
+    import foot from './foot.vue'
 
     export default{
         data(){
@@ -85,7 +80,8 @@
             }
         },
         components: {
-            top
+            top,
+            foot
         },
         methods: {
             fuck () {
@@ -118,7 +114,7 @@
         transition: all 0.5s ease-out;
     }
 
-    .fade-enter{
+    .fade-enter {
         transform: translateY(-500px);
         opacity: 0;
     }
